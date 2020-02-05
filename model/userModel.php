@@ -78,10 +78,28 @@ class UserModel extends User {
         $db = $pdo->DBConnect();
         $param_password = password_hash($this->getPassword(), PASSWORD_DEFAULT);
         try {
-            
-            $sql = "INSERT INTO  " . $this->table . " (username, password, rank, view) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO  " . $this->table . " (username, password) VALUES (?, ?)";
             $record = $db->prepare($sql);
-            $affectedLines = $record->execute([$this->getUsername(), $param_password, 'default', '30']); 
+            $affectedLines = $record->execute([$this->getUsername(), $param_password]); 
+
+            return $affectedLines;     
+        }
+        catch (PDOException $exc){
+            echo $exc->getMessage();
+            return null;
+        }     
+    }
+
+    public function resetPassword() {
+        $pdo = new DBConnection();
+        $db = $pdo->DBConnect();
+        $param_password = password_hash($this->getPassword(), PASSWORD_DEFAULT);
+        $param_id = $_SESSION["id"];
+        try {
+            // Prepare an update statement
+            $sql = "UPDATE " . $this->table . " SET password = ? WHERE id_user = ?";
+            $record = $db->prepare($sql);
+            $affectedLines = $record->execute([$param_password, $param_id]); 
 
             return $affectedLines;     
         }

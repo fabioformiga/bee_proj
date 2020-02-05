@@ -85,7 +85,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="index.php?action=load_reset_password">
                                     <span class="nav-link-text ">Change password</span>
                                 </a>
                             </li>

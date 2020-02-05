@@ -30,6 +30,15 @@
             case 'register':
                 $userController->loadRegister();
             break;
+            case 'registration':
+                $userController->register($_POST['username'], $_POST['password'], $_POST['confirm_password']);
+            break;
+            case 'load_reset_password':
+                $userController->loadResetPassword();
+            break;
+            case 'reset_password':
+                $userController->resetPassword($_POST['new_password'], $_POST['confirm_password']);
+            break;
             case 'login':
                 if(empty($_POST['username']) && empty($_POST['password'])) {
                     if($action == "register") {

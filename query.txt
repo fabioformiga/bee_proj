@@ -31,4 +31,4 @@ day : SELECT * FROM `measure` WHERE 1 GROUP BY DAY(date_measure), HOUR(date_meas
 
 SELECT AVG(measure_value), date_measure, id_hive FROM `tmp_measure` WHERE id_hive IN (2, 5) AND type_measure = "weight" AND date_measure BETWEEN '2019-01-28 00:00:00' AND '2019-01-28 23:59:59' GROUP BY date_measure, id_hive
 
-test test
+admin : adminBee

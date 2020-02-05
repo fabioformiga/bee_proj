@@ -26,8 +26,14 @@
         function loadRegister() { 
             $username = $password = $confirm_password = "";
             $username_err = $password_err = $confirm_password_err = "";
-             
             require('../views/auth/register.php');
+        }
+
+        function loadResetPassword() {
+            // Define variables and initialize with empty values
+            $new_password = $confirm_password = "";
+            $new_password_err = $confirm_password_err = "";
+            require('../views/auth/resetPassword.php');
         }
 
         function login($username, $password) {
@@ -78,7 +84,7 @@
             require_once('../views/auth/login.php');
         } 
 
-        function register($username, $password) {
+        function register($register_username, $register_password, $register_confirm_password) {
             $username = $password = $confirm_password = "";
             $username_err = $password_err = $confirm_password_err = "";
              
@@ -86,12 +92,12 @@
             if($_SERVER["REQUEST_METHOD"] == "POST"){
  
                 // Validate username
-                if(empty(trim($_POST["username"]))){
+                if(empty(trim($register_username))){
                     $username_err = "Please enter a username.";
                 } else{
-                    $user = $this->user->checkLogin($username);
-                    if($user != "FALSE") {
-                        $username = trim($_POST["username"]);
+                    $user = $this->user->checkLogin($register_username);
+                    if($user == "FALSE") {
+                        $username = trim($register_username);
                         $this->user->setUsername($username);
                     }
                     else {
@@ -100,20 +106,20 @@
                 }
                 
                 // Validate password
-                if(empty(trim($_POST["password"]))){
+                if(empty(trim($register_password))){
                     $password_err = "Please enter a password.";     
-                } elseif(strlen(trim($_POST["password"])) < 6){
+                } elseif(strlen(trim($register_password)) < 6){
                     $password_err = "Password must have, at least, 6 characters.";
                 } else{
-                    $password = trim($_POST["password"]);
+                    $password = trim($register_password);
                     $this->user->setPassword($password);
                 }
                 
                 // Validate confirm password
-                if(empty(trim($_POST["confirm_password"]))){
+                if(empty(trim($register_confirm_password))){
                     $confirm_password_err = "Please confirm password.";     
                 } else{
-                    $confirm_password = trim($_POST["confirm_password"]);
+                    $confirm_password = trim($register_confirm_password);
                     if(empty($password_err) && ($password != $confirm_password)){
                         $confirm_password_err = "Password did not match.";
                     }
@@ -128,8 +134,43 @@
                         header("location: index.php");
                     }
                 }
+
                 require_once('../views/auth/register.php');
             }
+        }
+
+        function resetPassword($reset_new_password, $reset_confirm_password) {
+            $new_password = $confirm_password = "";
+            $new_password_err = $confirm_password_err = "";
+
+            // Validate new password
+            if(empty(trim($reset_new_password))){
+                $new_password_err = "Please enter the new password.";     
+            } elseif(strlen(trim($reset_new_password)) < 6){
+                $new_password_err = "Password must have atleast 6 characters.";
+            } else{
+                $new_password = $reset_new_password;
+            }
+                
+            // Validate confirm password
+            if(empty(trim($reset_confirm_password))){
+                $confirm_password_err = "Please confirm the password.";
+            } else{
+                $confirm_password = trim($reset_confirm_password);
+                if(empty($new_password_err) && ($new_password != $confirm_password)){
+                    $confirm_password_err = "Password did not match.";
+                }
+            }
+                    
+            // Check input errors before updating the database
+            if(empty($new_password_err) && empty($confirm_password_err)){
+                $this->user->setPassword($new_password);
+                $this->user->resetPassword();
+                // Password updated successfully. Destroy the session, and redirect to login page
+                session_destroy();
+                header("location: index.php");
+            }
+            require_once('../views/auth/resetPassword.php');
         }
 
         function logout() {

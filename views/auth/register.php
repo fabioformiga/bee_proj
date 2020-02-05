@@ -1,16 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <title><?php echo TXT_TAB_TITLE_LOGIN; ?> </title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
     <?php 
         if(empty($username_err) || empty($password_err)) {
             require_once '../config/properties.php';        
             require_once '../views/header.php';  
         }
-
-        //echo htmlspecialchars($_SERVER["PHP_SELF"]);
     ?>
     <style type="text/css">
         body{ font: 14px sans-serif; }
