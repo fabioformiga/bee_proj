@@ -86,9 +86,20 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    <span class="nav-link-text humidity_chart">Change password</span>
+                                    <span class="nav-link-text ">Change password</span>
                                 </a>
                             </li>
+                            <?php
+                                if($_SESSION["username"] == "admin") {
+                                    ?>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="index.php?action=register">
+                                                <span class="nav-link-text ">Create account</span>
+                                            </a>
+                                        </li>
+                                    <?php
+                                }
+                            ?>
                         </ul>
                     </li>
 

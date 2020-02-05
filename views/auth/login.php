@@ -40,7 +40,6 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" value="<?php echo TXT_TITLE_LOGIN; ?>">
                         </div>
-                        <p><?php echo TXT_ANY_ACCOUNT; ?><a href="register.php"><?php echo TXT_SIGN_UP; ?></a>.</p>
                     </form>
                 </div>
             </div>

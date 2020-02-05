@@ -45,6 +45,52 @@ class UserModel extends User {
         }  
     }
 
+    public function checkLogin($username) {
+        $pdo = new DBConnection();
+        $db = $pdo->DBConnect();
+        try {
+            $db->beginTransaction();
+            $sql = "SELECT username FROM " . $this->table . " WHERE username = ? LIMIT 1";
+            $record = $db->prepare($sql);
+            $record->execute(array($username));
+            $valueExist = $record->rowCount();
+            if ($valueExist) {
+                $dataList = $record->fetch();
+                $db->commit();
+                $db = null;
+                return $dataList;
+            } else {
+                $db->commit();
+                $db = null;
+                return "FALSE";
+            }        
+        }
+        catch (PDOException $exc){
+            $db->rollback();
+            $db = null;
+            echo $exc->getMessage();
+            return null;
+        } 
+    }
+
+    public function register() {
+        $pdo = new DBConnection();
+        $db = $pdo->DBConnect();
+        $param_password = password_hash($this->getPassword(), PASSWORD_DEFAULT);
+        try {
+            
+            $sql = "INSERT INTO  " . $this->table . " (username, password, rank, view) VALUES (?, ?, ?, ?)";
+            $record = $db->prepare($sql);
+            $affectedLines = $record->execute([$this->getUsername(), $param_password, 'default', '30']); 
+
+            return $affectedLines;     
+        }
+        catch (PDOException $exc){
+            echo $exc->getMessage();
+            return null;
+        }     
+    }
+
     public function getUserHives() {
         $id_user = $this->getIdUser();
         $pdo = new DBConnection();

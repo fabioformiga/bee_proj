@@ -27,9 +27,16 @@
 
     if ($action != "") {
         switch ($action){
+            case 'register':
+                $userController->loadRegister();
+            break;
             case 'login':
                 if(empty($_POST['username']) && empty($_POST['password'])) {
-                    $userController->loadLogin();
+                    if($action == "register") {
+                        $userController->loadRegister();
+                    } else {
+                        $userController->loadLogin();
+                    }
                 } else {
                     $userController->login($_POST['username'], $_POST['password']);
                 }
@@ -64,9 +71,6 @@
             case 'receive_esp':
                 $espController->storeESPData(filter_input(INPUT_POST, "hive"), filter_input(INPUT_POST, "temp"), filter_input(INPUT_POST, "humi"), filter_input(INPUT_POST, "weight"));
             break;
-/*             case 'esp': 
-                $espController->getESPData();
-            break; */
             case 'warning':
                 $warningController->loadWarning();
             break;
@@ -76,7 +80,11 @@
         }
     } else {
         if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-            $userController->loadLogin();
+            if($action == "register") {
+                $userController->loadRegister();
+            } else {
+                $userController->loadLogin();
+            }
         } else {
             $dashboardController->loadDashboard();
         }

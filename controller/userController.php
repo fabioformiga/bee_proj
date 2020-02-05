@@ -23,6 +23,13 @@
             require('../views/auth/login.php');
         }
 
+        function loadRegister() { 
+            $username = $password = $confirm_password = "";
+            $username_err = $password_err = $confirm_password_err = "";
+             
+            require('../views/auth/register.php');
+        }
+
         function login($username, $password) {
             $username_err = "";
             $password_err = "";
@@ -70,6 +77,60 @@
             }
             require_once('../views/auth/login.php');
         } 
+
+        function register($username, $password) {
+            $username = $password = $confirm_password = "";
+            $username_err = $password_err = $confirm_password_err = "";
+             
+            // Processing form data when form is submitted
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+                // Validate username
+                if(empty(trim($_POST["username"]))){
+                    $username_err = "Please enter a username.";
+                } else{
+                    $user = $this->user->checkLogin($username);
+                    if($user != "FALSE") {
+                        $username = trim($_POST["username"]);
+                        $this->user->setUsername($username);
+                    }
+                    else {
+                        $username_err = "This username is already taken.";
+                    }
+                }
+                
+                // Validate password
+                if(empty(trim($_POST["password"]))){
+                    $password_err = "Please enter a password.";     
+                } elseif(strlen(trim($_POST["password"])) < 6){
+                    $password_err = "Password must have, at least, 6 characters.";
+                } else{
+                    $password = trim($_POST["password"]);
+                    $this->user->setPassword($password);
+                }
+                
+                // Validate confirm password
+                if(empty(trim($_POST["confirm_password"]))){
+                    $confirm_password_err = "Please confirm password.";     
+                } else{
+                    $confirm_password = trim($_POST["confirm_password"]);
+                    if(empty($password_err) && ($password != $confirm_password)){
+                        $confirm_password_err = "Password did not match.";
+                    }
+                }
+                
+                // Check input errors before inserting in database
+                if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+                    $insert = $this->user->register();
+                    if(empty($insert)) {
+                        echo "Something went wrong. Please try again later.";
+                    } else {
+                        header("location: index.php");
+                    }
+                }
+                require_once('../views/auth/register.php');
+            }
+        }
 
         function logout() {
             // Unset all of the session variables
