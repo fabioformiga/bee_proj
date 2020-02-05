@@ -31,7 +31,7 @@
                 $userController->loadRegister();
             break;
             case 'registration':
-                $userController->register($_POST['username'], $_POST['password'], $_POST['confirm_password']);
+                $userController->register($_POST['username'], $_POST['password'], $_POST['confirm_password'], $_POST['input_hive']);
             break;
             case 'load_reset_password':
                 $userController->loadResetPassword();

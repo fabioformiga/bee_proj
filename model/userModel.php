@@ -138,4 +138,32 @@ class UserModel extends User {
         } 
     }
 
+    public function getLastUserId() {
+        $pdo = new DBConnection();
+        $db = $pdo->DBConnect();
+        try {
+            $db->beginTransaction();
+            $sql = "SELECT id_user FROM " . $this->table . " ORDER BY id_user DESC LIMIT 1";
+            $record = $db->prepare($sql);
+            $record->execute(array($username));
+            $valueExist = $record->rowCount();
+            if ($valueExist) {
+                $dataList = $record->fetch();
+                $db->commit();
+                $db = null;
+                return $dataList;
+            } else {
+                $db->commit();
+                $db = null;
+                return "FALSE";
+            }        
+        }
+        catch (PDOException $exc){
+            $db->rollback();
+            $db = null;
+            echo $exc->getMessage();
+            return null;
+        }   
+    }
+
 }

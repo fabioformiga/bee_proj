@@ -35,6 +35,19 @@
                         <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
                         <span class="help-block"><?php echo $confirm_password_err; ?></span>
                     </div>
+
+                    <div class="form-group">
+                        <label>Select hive</label></br>
+                            <?php 
+                                foreach($list_hives as $hive) {
+                                    echo '<div class="form-check form-check-inline">';
+                                    echo '<input class="form-check-input" type="checkbox" name="input_hive[]" id="' . $hive["name_hive"] . '" value="' . $hive["id_hive"] . '">';
+                                    echo '<label class="form-check-label" for="' . $hive["name_hive"] . '" >' . $hive["name_hive"] . '</label>';
+                                    echo '</div>';
+                                }
+                            ?>
+                    </div>
+
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <input type="reset" class="btn btn-default" value="Reset">

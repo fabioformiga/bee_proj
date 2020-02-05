@@ -1,12 +1,15 @@
 <?php
-     require('../model/userModel.php');
+    require('../model/userModel.php');
+    //require('../model/hiveModel.php');
 
     class UserController {
         
         private $user;
+        private $hive;
 
         public function __construct() {
             $this->user = new UserModel();
+            $this->hive = new HiveModel();
         }
 
         /*************************************************************
@@ -25,7 +28,8 @@
 
         function loadRegister() { 
             $username = $password = $confirm_password = "";
-            $username_err = $password_err = $confirm_password_err = "";
+            $username_err = $password_err = $confirm_password_err  = "";
+            $list_hives = $this->hive->getHiveList();
             require('../views/auth/register.php');
         }
 
@@ -84,7 +88,7 @@
             require_once('../views/auth/login.php');
         } 
 
-        function register($register_username, $register_password, $register_confirm_password) {
+        function register($register_username, $register_password, $register_confirm_password, $register_hive_list) {
             $username = $password = $confirm_password = "";
             $username_err = $password_err = $confirm_password_err = "";
              
@@ -124,6 +128,9 @@
                         $confirm_password_err = "Password did not match.";
                     }
                 }
+
+                // Take hive rights 
+                $hive_list = $register_hive_list;
                 
                 // Check input errors before inserting in database
                 if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
@@ -131,6 +138,10 @@
                     if(empty($insert)) {
                         echo "Something went wrong. Please try again later.";
                     } else {
+                        $id_user = $this->user->getLastUserId();
+                        foreach($hive_list as $hive_id) {
+                            $insert_hive_list = $this->hive->registerHiveUser($hive_id, $id_user["id_user"]);
+                        }
                         header("location: index.php");
                     }
                 }

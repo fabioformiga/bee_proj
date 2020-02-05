@@ -1,12 +1,12 @@
 <?php
-    require('../model/dashboardModel.php');
+    require('../model/hiveModel.php');
 
     class DashboardController {
         
-        private $dashboardModel;
+        private $hive;
 
         public function __construct() {
-            $this->dashboardModel = new DashboardModel();
+            $this->hive = new HiveModel();
         }
 
         /*************************************************************
@@ -15,7 +15,7 @@
 
         *************************************************************/
         function loadDashboard() {
-            $hive_list = $this->dashboardModel->getHiveNames();
+            $hive_list = $this->hive->getHivesWithRights();
             require_once('../views/mainpage.php');
         }
     }
