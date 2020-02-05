@@ -24,10 +24,10 @@
                         <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-collapse" href="#" id="hasSubItems" data-toggle="collapse" data-target="#collapseSubItems3" aria-controls="collapseSubItems3" aria-expanded="false">
+                        <a class="nav-link nav-link-collapse" href="#" id="hasSubItems" data-toggle="collapse" data-target="#collapseSubItems1" aria-controls="collapseSubItems1" aria-expanded="false">
                             Hives
                         </a>
-                        <ul class="nav-second-level collapse" id="collapseSubItems3" data-parent="#navAccordion">
+                        <ul class="nav-second-level collapse" id="collapseSubItems1" data-parent="#navAccordion">
                             <li class="nav-item col-sm-10">
                                 <input type="search" class="form-control form-control-sm" id="searchbar_hive" aria-describedby="hiveHelp" placeholder="Enter hive number">
                             </li>
@@ -69,6 +69,29 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-collapse" href="#" id="hasSubItems" data-toggle="collapse" data-target="#collapseSubItems3" aria-controls="collapseSubItems3" aria-expanded="false">
+                            Users
+                        </a>
+                        <ul class="nav-second-level collapse" id="collapseSubItems3" data-parent="#navAccordion">
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#">
+                                    <span class="nav-link-text">User: <?php echo $_SESSION["username"]?></span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?action=disconnect">
+                                    <span class="nav-link-text">Disconnect</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span class="nav-link-text humidity_chart">Change password</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
 <!--                     <li class="nav-item">
                         <a class="nav-link nav-link-collapse warning_tab" href="#" id="hasSubItems" data-toggle="collapse" data-target="#collapseSubItems4" aria-controls="collapseSubItems4" aria-expanded="false">
                             Warning system <span class="badge badge-warning">4</span>

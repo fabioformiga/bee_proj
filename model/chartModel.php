@@ -90,15 +90,15 @@ class ChartModel {
         } 
         else if($_SESSION["filterLocation"] == "NULL" && $_SESSION["minDate"] != "NULL" && $_SESSION["maxDate"] != "NULL" && $_SESSION["filterUser"] == "NULL") {
             // date without location and user filtering
-            $sql = $sql_select . " WHERE type_measure=\"" . $type_of_chart . "\" AND date_measure BETWEEN \"" . $_SESSION["minDate"] . "\" AND \"" . $_SESSION["maxDate"] . "\" " . $sql_period . $sql_order;
+            $sql = $sql_select . " WHERE id_hive IN (" . $_SESSION["hive_rights"] . ") AND type_measure=\"" . $type_of_chart . "\" AND date_measure BETWEEN \"" . $_SESSION["minDate"] . "\" AND \"" . $_SESSION["maxDate"] . "\" " . $sql_period . $sql_order;
         }
         else if($_SESSION["filterLocation"] == "NULL" && $_SESSION["minDate"] != "NULL" && $_SESSION["maxDate"] == "NULL" && $_SESSION["filterUser"] == "NULL") {
             // min date without location, max date and user filtering
-            $sql = $sql_select . " WHERE type_measure=\"" . $type_of_chart . "\" AND date_measure > \"" . $_SESSION["minDate"] . "\" " . $sql_period . $sql_order;
+            $sql = $sql_select . " WHERE id_hive IN (" . $_SESSION["hive_rights"] . ") AND type_measure=\"" . $type_of_chart . "\" AND date_measure > \"" . $_SESSION["minDate"] . "\" " . $sql_period . $sql_order;
         }
         else if($_SESSION["filterLocation"] == "NULL" && $_SESSION["minDate"] == "NULL" && $_SESSION["maxDate"] != "NULL" && $_SESSION["filterUser"] == "NULL") {
             // max date without location, min date and user filtering
-            $sql = $sql_select . " WHERE type_measure=\"" . $type_of_chart . "\" AND date_measure < \"" . $_SESSION["maxDate"] . "\" " . $sql_period . $sql_order;
+            $sql = $sql_select . " WHERE id_hive IN (" . $_SESSION["hive_rights"] . ") AND type_measure=\"" . $type_of_chart . "\" AND date_measure < \"" . $_SESSION["maxDate"] . "\" " . $sql_period . $sql_order;
         }
         else if($_SESSION["filterLocation"] != "NULL" && $_SESSION["minDate"] != "NULL" && $_SESSION["maxDate"] == "NULL" && $_SESSION["filterUser"] == "NULL") {
             // min date and location without max date and user filtering
@@ -113,7 +113,7 @@ class ChartModel {
             $sql = $sql_select . " INNER JOIN hive on " . $this->table . ".id_hive = hive.id_hive WHERE type_measure=\"" . $type_of_chart . "\" AND hive.name_hive IN (" . $_SESSION["filterLocation"] . ") AND date_measure BETWEEN \"" . $_SESSION["minDate"] . "\" AND \"" . $_SESSION["maxDate"] . "\" " . $sql_period . $sql_hive_list . $sql_order;
         }
         else if ($_SESSION["filterLocation"] == "NULL" && $_SESSION["minDate"] == "NULL" && $_SESSION["maxDate"] == "NULL" && $_SESSION["filterUser"] == "NULL") {
-            $sql = $sql_select . " WHERE type_measure=\"" . $type_of_chart . "\" " . $sql_period . $sql_order;
+            $sql = $sql_select . " WHERE id_hive IN (" . $_SESSION["hive_rights"] . ") AND type_measure=\"" . $type_of_chart . "\" " . $sql_period . $sql_order;
         }
         return $sql;
     }

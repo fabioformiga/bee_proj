@@ -19,7 +19,7 @@ class DashboardModel {
         $db = $pdo->DBConnect();
         try {
             $db->beginTransaction();
-            $sql = "SELECT * from " . $this->table;
+            $sql = "SELECT * from " . $this->table . " WHERE id_hive IN (" . $_SESSION["hive_rights"] . ")";
             $record = $db->prepare($sql);
             $record->execute();
             $valueExist = $record->rowCount();

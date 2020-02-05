@@ -26,6 +26,7 @@
         function login($username, $password) {
             $username_err = "";
             $password_err = "";
+            $hive_user_list = "";
 
             // Check if username is empty
             if(empty($username)){
@@ -48,10 +49,17 @@
                     // Store data in session variables
                     $_SESSION["loggedin"] = true;
                     $_SESSION["id"] = $loginResponse["id_user"];
-                    $_SESSION["username"] = $loginResponse["username"]; 
+                    $_SESSION["username"] = $loginResponse["username"];
+                    $this->user->setIdUser($loginResponse["id_user"]); 
+                    $user_hives = $this->user->getUserHives();
+                    foreach($user_hives as $user_hive) {
+                        $hive_user_list .= "\"" . $user_hive["id_hive"] . "\",";
+                    }
+                    $hive_user_list = rtrim($hive_user_list, ",");
+                    $_SESSION["hive_rights"] = $hive_user_list;
                         
                     // Redirect user to welcome page
-                    header('Location: welcome.php?action=listObjects');
+                    header('Location: index.php');
                 } else{
                     // Display an error message if password is not valid
                     $password_err = "The password you entered was not valid.";
@@ -66,6 +74,7 @@
         function logout() {
             // Unset all of the session variables
             $_SESSION = array();
+            header('Location: index.php');
         }
     }
 ?>

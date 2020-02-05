@@ -67,8 +67,11 @@
 /*             case 'esp': 
                 $espController->getESPData();
             break; */
-            case 'warning';
+            case 'warning':
                 $warningController->loadWarning();
+            break;
+            case 'disconnect':
+                $userController->logout();
             break;
         }
     } else {

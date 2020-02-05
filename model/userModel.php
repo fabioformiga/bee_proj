@@ -45,20 +45,33 @@ class UserModel extends User {
         }  
     }
 
-    public function setObject() {
+    public function getUserHives() {
+        $id_user = $this->getIdUser();
         $pdo = new DBConnection();
         $db = $pdo->DBConnect();
         try {
-            $sql = "INSERT INTO  " . $this->table . "(object_name, quantity, brand, year, place) VALUES (?,?,?,?,?)";
+            $db->beginTransaction();
+            $sql = "SELECT id_hive FROM hive_location WHERE id_user = ?";
             $record = $db->prepare($sql);
-            $affectedLines = $record->execute(array($this->getNameObject(), $this->getQuantity(), $this->getBrand(), $this->getYear(), $this->getPlace())); 
-            
-            return $affectedLines;     
+            $record->execute(array($this->getIdUser()));
+            $valueExist = $record->rowCount();
+            if ($valueExist) {
+                $dataList = $record->fetchAll(PDO::FETCH_ASSOC);
+                $db->commit();
+                $db = null;
+                return $dataList;
+            } else {
+                $db->commit();
+                $db = null;
+                return $valueExist;
+            }        
         }
         catch (PDOException $exc){
+            $db->rollback();
+            $db = null;
             echo $exc->getMessage();
             return null;
-        }          
+        } 
     }
 
 }
