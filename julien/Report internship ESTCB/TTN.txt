@@ -1,0 +1,11 @@
+// Schedule TX every this many seconds (might become longer due to duty
+// cycle limitations).
+const unsigned TX_INTERVAL = 20;
+
+// Pin mapping
+const lmic_pinmap lmic_pins = {
+    .nss = 10,// Connected to pin D10
+    .rxtx = LMIC_UNUSED_PIN,// For placeholder only, Do not connected on RFM92/RFM95
+    .rst = 9,// Needed on RFM92/RFM95? (probably not)
+    .dio = {5, 6, 7},// Specify pin numbers for DIO0, 1, 2
+};

@@ -1,0 +1,6 @@
+Install paho.mqtt.client
+
+1)      sudo apt install python-pip
+
+
+2)      pip install paho-mqtt

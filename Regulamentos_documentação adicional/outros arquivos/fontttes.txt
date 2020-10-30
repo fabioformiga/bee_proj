@@ -1,0 +1,95 @@
+INSTALAR ESP8266 no linux:
+ https://ubidots.com/blog/esp8266-arduino-ide-tutorial/
+
+
+Git hub MQTT
+https://gist.github.com/bachwehbi/2a3fec727c8b879970b0
+
+
+
+getting started with the wemos d1 esp 8266 wifi board
+https://cyaninfinite.com/getting-started-with-the-wemos-d1-esp8266-wifi-board/
+
+
+
+esp web server with html web page
+https://circuits4you.com/2016/12/16/esp8266-web-server-html/
+
+
+
+getting started with mqtt using python
+embeddedlaboratory.blogspot.com/2018/01/getting-started-with-mqtt-using-python.html
+
+pyton docs
+https://www.eclipse.org/paho/clients/python/docs/
+
+
+
+BBT MQTT python main code for rapsberry -- GITHUB
+https://gist.github.com/bachwehbi/2a3fec727c8b879970b0
+
+
+
+HOW TO USE MQTT WITH RASPBERRY PI AND ESP8266: 8 STEPS 
+https://www.instructables.com/id/How-to-Use-MQTT-With-the-Raspberry-Pi-and-ESP8266/
+
+
+
+WeMos-D1-R2-WiFi-ESP8266-Development-Board-Compatible-Arduino-UNO-Program-By-Arduino-IDE
+https://www.banggood.com/WeMos-D1-R2-WiFi-ESP8266-Development-Board-Compatible-Arduino-UNO-Program-By-Arduino-IDE-p-1011870.html?p=DQ30066511122014069J&utm_campaign=educ8stv&utm_content=3216&cur_warehouse=CN
+
+
+datasheet os ESP8266 english
+https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
+
+
+video tutorial NODE MCU ESP("&& SEND DATA TO RAPSBERRY PI USING MQTT BROKER
+https://www.youtube.com/watch?v=_lf7n2N-mEw
+
+########################################
+##############BASE DADOS################
+########################################
+
+mysql database python connect
+https://www.w3schools.com/python/python_mysql_getstarted.asp
+
+Python MySQL Create Database
+https://www.w3schools.com/python/python_mysql_create_db.asp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

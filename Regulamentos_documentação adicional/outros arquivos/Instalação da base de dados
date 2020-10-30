@@ -1,0 +1,17 @@
++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++INSTALAÇÃO DA BASE DE DADOS++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1) instalar o web server
+	
+	$sudo apt-get install apache2
+2) instalar o php my admin
+	
+	$sudo apt-get install phpmyadmin 
+
+	criar a conexão com o servidor apache 2, colocar o devido nome de utilizador e password (necessario introduzir multiplas vezes a password).
+
+3) instalar o a base de dados my sql
+	$sudo apt-get install mysql-server
+
+	configurar devidamente a base de dados com o nome de utilizador e password
